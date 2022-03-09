@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Amicable Numbers</title>
+	<script language="javascript">
+
+		displayNumbers = (num_one,num_two) => {
+			int1 = document.form1.num_one.value;
+			int2 = document.form1.num_two.value;
+
+			result = int1 + "<br/>" + int2;
+
+			document.getElementById("display").innerHTML = result;
+		}
+
+		addArray = (arr) => {
+			sum = 0;
+
+			for (i = 0; i < arr.length; i++) {
+				sum += arr[i];
+			}
+
+			return sum;
+		}
+
+        isAFactor = (num,fact) => {
+            return (num % fact == 0);
+        }
+
+		getFactors = (num) => {
+			fact_arr = [];
+
+			for (i = 1; i < num; i++){
+				if (isAFactor (num, i)) {
+					fact_arr[fact_arr.length] = i;
+				}
+			}
+			return fact_arr;
+		}
+
+        areAmicable = (num1, num2) => {
+            sum1 = addArray(getFactors(num1));
+            sum2 = addArray(getFactors(num2));
+
+            return (sum1 == num2 && sum2 == num1);
+        }
+
+		exec = () => {
+			num1 = document.form1.num_one.value;
+			num2 = document.form1.num_two.value;
+
+            if (areAmicable (num1, num2)) {
+                document.getElementById("elements").innerHTML =
+                "These numbers are amicable!";
+            } else {
+                document.getElementById("elements").innerHTML =
+                 "These numbers are not amicable :((";
+            }
+		}
+	</script>
+</head>
+<body>
+	<h1>Amicable Numbers</h1>
+
+	<form name="form1">
+		Enter an integer:
+		<input type="text" id="num_one" name="num_one"><br/><br/>
+		Enter another integer:
+		<input type="text" id="num_two" name="num_two"><br/><br/>
+		<button type="button" onclick="exec()">Save</button>
+	</form>
+
+	<hr>
+
+	<br/>
+
+	<div id="display"></div>
+	<div id="elements"></div>
+
+</body>
+</html>
